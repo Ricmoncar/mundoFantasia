@@ -14,18 +14,18 @@ import com.daw.services.Servicio;
 
 @RestController
 public class AplicacionSQLController {
-	
-	@Autowired
-	private Servicio servicio;
-	
-	@GetMapping("/consulta_planetas")
-	public ResponseEntity<?> buscarPlanetas(@RequestParam String nombre){
-		try {
-			return ResponseEntity.ok().body(servicio.buscarPlanetas(nombre));
-		} catch (SQLException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-	}
+    
+    @Autowired
+    private Servicio servicio;
+    
+    @GetMapping("/consulta_planetas")
+    public ResponseEntity<?> buscarPlanetas(@RequestParam(required = false, defaultValue = "") String nombre) {
+        try {
+            return ResponseEntity.ok().body(servicio.buscarPlanetas(nombre));
+        } catch (SQLException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
     @GetMapping("/aniadir_planeta")
     public ResponseEntity<?> aniadirPlaneta(@RequestParam String nombre, @RequestParam String ubicacion, @RequestParam Boolean habitable, @RequestParam Float nivelAgua, @RequestParam Date fechaCreacion, @RequestParam Float tamanio, @RequestParam Float densidad, @RequestParam String descripcion) {
@@ -34,7 +34,8 @@ public class AplicacionSQLController {
         } catch (SQLException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
-}
+    }
+
     @GetMapping("/eliminar_planeta")
     public ResponseEntity<?> eliminarPlaneta(@RequestParam Integer id) {
         try {
@@ -43,6 +44,7 @@ public class AplicacionSQLController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
     @GetMapping("/actualizar_planeta")
     public ResponseEntity<?> actualizarPlaneta(@RequestParam Integer id, @RequestParam String nombre, @RequestParam String ubicacion, @RequestParam Boolean habitable, @RequestParam Float nivelAgua, @RequestParam Date fechaCreacion, @RequestParam Float tamanio, @RequestParam Float densidad, @RequestParam String descripcion) {
         try {
@@ -50,8 +52,17 @@ public class AplicacionSQLController {
         } catch (SQLException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
-        
-}}
+    }
+
+    @GetMapping("/listar_planetas")
+    public ResponseEntity<?> listarPlanetas() {
+        try {
+            return ResponseEntity.ok().body(servicio.listarPlanetas());
+        } catch (SQLException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+}
 
 
     

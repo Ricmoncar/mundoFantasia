@@ -17,7 +17,7 @@ import com.daw.controllers.Planeta;
 @Service
 public class Servicio {
 	
-	static final String url = "jdbc:mysql://localhost:3306/base_datos_biblioteca?user=usuario&password=usuario";	
+	static final String url = "jdbc:mysql://localhost:3306/mundo_fantasia?user=usuario&password=usuario";	
 	
 	static {
 		try {
@@ -39,8 +39,8 @@ public class Servicio {
 			planeta.setNombre(rs.getString("nombre"));
 			planeta.setUbicacion(rs.getString("ubicacion"));
 			planeta.setHabitable(rs.getBoolean("habitable"));
-			planeta.setNivelAgua(rs.getFloat("nivel_agua"));
-			planeta.setFechaCreacion(rs.getDate("fecha_creacion"));
+			planeta.setNivelAgua(rs.getFloat("nivelAgua"));
+			planeta.setFechaCreacion(rs.getDate("fechacreacion"));
 			planeta.setTamanio(rs.getFloat("tamanio"));
 			planeta.setDensidad(rs.getFloat("densidad"));
 			planeta.setDescripcion(rs.getString("descripcion"));
@@ -54,7 +54,7 @@ public class Servicio {
 
 	public String aniadirPlaneta(String nombre, String ubicacion, Boolean habitable, Float nivelAgua, Date fechaCreacion, Float tamanio, Float densidad, String descripcion) throws SQLException {
 		Connection con = DriverManager.getConnection(url);
-		PreparedStatement ps = con.prepareStatement("INSERT INTO planeta (nombre, ubicacion, habitable, nivel_agua, fecha_creacion, tamanio, densidad, descripcion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+		PreparedStatement ps = con.prepareStatement("INSERT INTO planeta (nombre, ubicacion, habitable, nivelagua, fechacreacion, tamanio, densidad, descripcion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 		ps.setString(1, nombre);
 		ps.setString(2, ubicacion);
 		ps.setBoolean(3, habitable);
@@ -81,7 +81,7 @@ public class Servicio {
 
 	public String actualizarPlaneta(Integer id, String nombre, String ubicacion, Boolean habitable, Float nivelAgua, Date fechaCreacion, Float tamanio, Float densidad, String descripcion) throws SQLException {
 		Connection con = DriverManager.getConnection(url);
-		PreparedStatement ps = con.prepareStatement("UPDATE planeta SET nombre = ?, ubicacion = ?, habitable = ?, nivel_agua = ?, fecha_creacion = ?, tamanio = ?, densidad = ?, descripcion = ? WHERE id = ?");
+		PreparedStatement ps = con.prepareStatement("UPDATE planeta SET nombre = ?, ubicacion = ?, habitable = ?, nivelagua = ?, fechacreacion = ?, tamanio = ?, densidad = ?, descripcion = ? WHERE id = ?");
 		ps.setString(1, nombre);
 		ps.setString(2, ubicacion);
 		ps.setBoolean(3, habitable);
@@ -108,8 +108,8 @@ public class Servicio {
 			planeta.setNombre(rs.getString("nombre"));
 			planeta.setUbicacion(rs.getString("ubicacion"));
 			planeta.setHabitable(rs.getBoolean("habitable"));
-			planeta.setNivelAgua(rs.getFloat("nivel_agua"));
-			planeta.setFechaCreacion(rs.getDate("fecha_creacion"));
+			planeta.setNivelAgua(rs.getFloat("nivelagua"));
+			planeta.setFechaCreacion(rs.getDate("fechacreacion"));
 			planeta.setTamanio(rs.getFloat("tamanio"));
 			planeta.setDensidad(rs.getFloat("densidad"));
 			planeta.setDescripcion(rs.getString("descripcion"));
